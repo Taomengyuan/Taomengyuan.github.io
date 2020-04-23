@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Java并发编程基础 | 桃花圆梦</title>
+    <meta name="description" content="梦里桃花">
+    <meta name="generator" content="VuePress 1.3.1">
+    <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.f5033492.css" as="style"><link rel="preload" href="/assets/js/app.1db75ca0.js" as="script"><link rel="preload" href="/assets/js/3.6c104418.js" as="script"><link rel="preload" href="/assets/js/1.dc7420e8.js" as="script"><link rel="preload" href="/assets/js/49.c3499600.js" as="script"><link rel="preload" href="/assets/js/10.0927cd0d.js" as="script"><link rel="prefetch" href="/assets/js/100.f638cd79.js"><link rel="prefetch" href="/assets/js/101.400c2e90.js"><link rel="prefetch" href="/assets/js/102.4fea114a.js"><link rel="prefetch" href="/assets/js/103.27a3a5d3.js"><link rel="prefetch" href="/assets/js/104.fe1a1b06.js"><link rel="prefetch" href="/assets/js/105.8baf432c.js"><link rel="prefetch" href="/assets/js/106.474b9fef.js"><link rel="prefetch" href="/assets/js/107.d139ad7a.js"><link rel="prefetch" href="/assets/js/108.564ebd99.js"><link rel="prefetch" href="/assets/js/109.b42eb125.js"><link rel="prefetch" href="/assets/js/11.c99aaded.js"><link rel="prefetch" href="/assets/js/110.f17e139c.js"><link rel="prefetch" href="/assets/js/111.8cf6db88.js"><link rel="prefetch" href="/assets/js/112.43cc57b2.js"><link rel="prefetch" href="/assets/js/113.2478402a.js"><link rel="prefetch" href="/assets/js/114.fd197fd1.js"><link rel="prefetch" href="/assets/js/115.1a5fb7a8.js"><link rel="prefetch" href="/assets/js/116.e1106a15.js"><link rel="prefetch" href="/assets/js/117.cde5169f.js"><link rel="prefetch" href="/assets/js/118.8340ebfc.js"><link rel="prefetch" href="/assets/js/119.bb3ba089.js"><link rel="prefetch" href="/assets/js/12.f58a8e1b.js"><link rel="prefetch" href="/assets/js/120.6756e1a8.js"><link rel="prefetch" href="/assets/js/121.77bc9f4a.js"><link rel="prefetch" href="/assets/js/122.b6a1d32c.js"><link rel="prefetch" href="/assets/js/123.bb3c4667.js"><link rel="prefetch" href="/assets/js/124.46f97d2d.js"><link rel="prefetch" href="/assets/js/125.a67de171.js"><link rel="prefetch" href="/assets/js/126.d484b4c4.js"><link rel="prefetch" href="/assets/js/127.b0975d95.js"><link rel="prefetch" href="/assets/js/128.9bd7d898.js"><link rel="prefetch" href="/assets/js/129.c121edda.js"><link rel="prefetch" href="/assets/js/13.17337441.js"><link rel="prefetch" href="/assets/js/130.14bd5a03.js"><link rel="prefetch" href="/assets/js/131.4913a4da.js"><link rel="prefetch" href="/assets/js/132.62d6c88b.js"><link rel="prefetch" href="/assets/js/133.ed757f4d.js"><link rel="prefetch" href="/assets/js/134.8757f710.js"><link rel="prefetch" href="/assets/js/135.179bb088.js"><link rel="prefetch" href="/assets/js/136.bb037bd3.js"><link rel="prefetch" href="/assets/js/137.7199cfce.js"><link rel="prefetch" href="/assets/js/138.9c7613c6.js"><link rel="prefetch" href="/assets/js/139.eb233fd3.js"><link rel="prefetch" href="/assets/js/14.0fadc4aa.js"><link rel="prefetch" href="/assets/js/140.63fd1b91.js"><link rel="prefetch" href="/assets/js/141.c92a6183.js"><link rel="prefetch" href="/assets/js/142.a171694b.js"><link rel="prefetch" href="/assets/js/143.c60fddc2.js"><link rel="prefetch" href="/assets/js/144.a632fcd5.js"><link rel="prefetch" href="/assets/js/145.f79dbd5e.js"><link rel="prefetch" href="/assets/js/146.b2f33fa9.js"><link rel="prefetch" href="/assets/js/147.5b3f4ab8.js"><link rel="prefetch" href="/assets/js/148.0f3aac32.js"><link rel="prefetch" href="/assets/js/149.3cf3d0d2.js"><link rel="prefetch" href="/assets/js/15.23ec45ef.js"><link rel="prefetch" href="/assets/js/150.7b71d121.js"><link rel="prefetch" href="/assets/js/151.d6c719da.js"><link rel="prefetch" href="/assets/js/152.fbe52224.js"><link rel="prefetch" href="/assets/js/153.81d852ed.js"><link rel="prefetch" href="/assets/js/154.dca00a15.js"><link rel="prefetch" href="/assets/js/155.a6eb51c4.js"><link rel="prefetch" href="/assets/js/156.be33bae8.js"><link rel="prefetch" href="/assets/js/157.1c03b42b.js"><link rel="prefetch" href="/assets/js/158.0032b29c.js"><link rel="prefetch" href="/assets/js/159.fffac1ee.js"><link rel="prefetch" href="/assets/js/16.6781c168.js"><link rel="prefetch" href="/assets/js/160.38096a43.js"><link rel="prefetch" href="/assets/js/161.cb0e1552.js"><link rel="prefetch" href="/assets/js/162.63d6a788.js"><link rel="prefetch" href="/assets/js/163.36999cb7.js"><link rel="prefetch" href="/assets/js/164.27fd1311.js"><link rel="prefetch" href="/assets/js/165.77f78fa8.js"><link rel="prefetch" href="/assets/js/166.fbcda173.js"><link rel="prefetch" href="/assets/js/167.a49eb2c3.js"><link rel="prefetch" href="/assets/js/168.07d5aa36.js"><link rel="prefetch" href="/assets/js/169.2611d3a6.js"><link rel="prefetch" href="/assets/js/17.4693b43c.js"><link rel="prefetch" href="/assets/js/170.74ff359b.js"><link rel="prefetch" href="/assets/js/171.f22c1341.js"><link rel="prefetch" href="/assets/js/172.6e316106.js"><link rel="prefetch" href="/assets/js/173.dee4ae0d.js"><link rel="prefetch" href="/assets/js/174.c07cd86d.js"><link rel="prefetch" href="/assets/js/175.df9a0339.js"><link rel="prefetch" href="/assets/js/176.31e6cd00.js"><link rel="prefetch" href="/assets/js/177.152eebc4.js"><link rel="prefetch" href="/assets/js/178.e28ecfa0.js"><link rel="prefetch" href="/assets/js/179.55927854.js"><link rel="prefetch" href="/assets/js/18.c6911170.js"><link rel="prefetch" href="/assets/js/180.884ae82d.js"><link rel="prefetch" href="/assets/js/181.4d5b0cb0.js"><link rel="prefetch" href="/assets/js/182.2d61fbd3.js"><link rel="prefetch" href="/assets/js/183.87072251.js"><link rel="prefetch" href="/assets/js/184.d03d8def.js"><link rel="prefetch" href="/assets/js/185.0da64889.js"><link rel="prefetch" href="/assets/js/186.27895ece.js"><link rel="prefetch" href="/assets/js/187.d88f0f1d.js"><link rel="prefetch" href="/assets/js/188.454bd8ff.js"><link rel="prefetch" href="/assets/js/189.f1d864f2.js"><link rel="prefetch" href="/assets/js/19.f9027a9c.js"><link rel="prefetch" href="/assets/js/190.5f0bfab8.js"><link rel="prefetch" href="/assets/js/191.c0e26e8e.js"><link rel="prefetch" href="/assets/js/192.364d3019.js"><link rel="prefetch" href="/assets/js/193.b8ec6339.js"><link rel="prefetch" href="/assets/js/194.f4e5fe39.js"><link rel="prefetch" href="/assets/js/195.50dd62ba.js"><link rel="prefetch" href="/assets/js/196.a37abc55.js"><link rel="prefetch" href="/assets/js/197.e5b0cdda.js"><link rel="prefetch" href="/assets/js/198.d0b1d0cc.js"><link rel="prefetch" href="/assets/js/199.d23e587c.js"><link rel="prefetch" href="/assets/js/20.5b257537.js"><link rel="prefetch" href="/assets/js/200.b5e4f5aa.js"><link rel="prefetch" href="/assets/js/201.94a70bed.js"><link rel="prefetch" href="/assets/js/202.18d8051f.js"><link rel="prefetch" href="/assets/js/203.0e459f61.js"><link rel="prefetch" href="/assets/js/204.f6ff0d63.js"><link rel="prefetch" href="/assets/js/205.9a139e56.js"><link rel="prefetch" href="/assets/js/206.3ad2c1d5.js"><link rel="prefetch" href="/assets/js/207.73b97d7c.js"><link rel="prefetch" href="/assets/js/21.c6aeffce.js"><link rel="prefetch" href="/assets/js/22.38ac13a1.js"><link rel="prefetch" href="/assets/js/23.dbd0096e.js"><link rel="prefetch" href="/assets/js/24.7b92a236.js"><link rel="prefetch" href="/assets/js/25.bd1ef8aa.js"><link rel="prefetch" href="/assets/js/26.be2dec38.js"><link rel="prefetch" href="/assets/js/27.0e9da3a6.js"><link rel="prefetch" href="/assets/js/28.1c777f5d.js"><link rel="prefetch" href="/assets/js/29.9939f119.js"><link rel="prefetch" href="/assets/js/30.640ffbcf.js"><link rel="prefetch" href="/assets/js/31.a5332c70.js"><link rel="prefetch" href="/assets/js/32.57187d64.js"><link rel="prefetch" href="/assets/js/33.99953a1a.js"><link rel="prefetch" href="/assets/js/34.80ebba6a.js"><link rel="prefetch" href="/assets/js/35.26030e4a.js"><link rel="prefetch" href="/assets/js/36.48cb06f9.js"><link rel="prefetch" href="/assets/js/37.6337ae8a.js"><link rel="prefetch" href="/assets/js/38.b06a890b.js"><link rel="prefetch" href="/assets/js/39.ebe05a83.js"><link rel="prefetch" href="/assets/js/4.7c6bb58c.js"><link rel="prefetch" href="/assets/js/40.44981f8e.js"><link rel="prefetch" href="/assets/js/41.2e067484.js"><link rel="prefetch" href="/assets/js/42.fe32e7e8.js"><link rel="prefetch" href="/assets/js/43.97f5efa5.js"><link rel="prefetch" href="/assets/js/44.b7be66dd.js"><link rel="prefetch" href="/assets/js/45.cca81bad.js"><link rel="prefetch" href="/assets/js/46.dd85007a.js"><link rel="prefetch" href="/assets/js/47.3386822e.js"><link rel="prefetch" href="/assets/js/48.4e29864c.js"><link rel="prefetch" href="/assets/js/5.02d93850.js"><link rel="prefetch" href="/assets/js/50.f9e206a9.js"><link rel="prefetch" href="/assets/js/51.95ce8df0.js"><link rel="prefetch" href="/assets/js/52.36974c3e.js"><link rel="prefetch" href="/assets/js/53.3c77b25c.js"><link rel="prefetch" href="/assets/js/54.cf49070f.js"><link rel="prefetch" href="/assets/js/55.68462c86.js"><link rel="prefetch" href="/assets/js/56.807efa0b.js"><link rel="prefetch" href="/assets/js/57.e00ceae9.js"><link rel="prefetch" href="/assets/js/58.86366978.js"><link rel="prefetch" href="/assets/js/59.13b58d6e.js"><link rel="prefetch" href="/assets/js/6.ea3d8476.js"><link rel="prefetch" href="/assets/js/60.2a8fd07a.js"><link rel="prefetch" href="/assets/js/61.115af9cd.js"><link rel="prefetch" href="/assets/js/62.81c74be8.js"><link rel="prefetch" href="/assets/js/63.5926d940.js"><link rel="prefetch" href="/assets/js/64.ab29c7d5.js"><link rel="prefetch" href="/assets/js/65.64d0b094.js"><link rel="prefetch" href="/assets/js/66.86771d3f.js"><link rel="prefetch" href="/assets/js/67.f0000cc0.js"><link rel="prefetch" href="/assets/js/68.95fa3d8d.js"><link rel="prefetch" href="/assets/js/69.f9f18648.js"><link rel="prefetch" href="/assets/js/7.ae707765.js"><link rel="prefetch" href="/assets/js/70.9076c6c3.js"><link rel="prefetch" href="/assets/js/71.179d3e0c.js"><link rel="prefetch" href="/assets/js/72.a17dd3b7.js"><link rel="prefetch" href="/assets/js/73.0d2fda8f.js"><link rel="prefetch" href="/assets/js/74.6be33a45.js"><link rel="prefetch" href="/assets/js/75.12290f46.js"><link rel="prefetch" href="/assets/js/76.48451769.js"><link rel="prefetch" href="/assets/js/77.f2fc1bb3.js"><link rel="prefetch" href="/assets/js/78.d1a67936.js"><link rel="prefetch" href="/assets/js/79.6ac43534.js"><link rel="prefetch" href="/assets/js/8.8dfef86f.js"><link rel="prefetch" href="/assets/js/80.2d5d8db0.js"><link rel="prefetch" href="/assets/js/81.87f73fe7.js"><link rel="prefetch" href="/assets/js/82.1c5e25ee.js"><link rel="prefetch" href="/assets/js/83.b2a4c95d.js"><link rel="prefetch" href="/assets/js/84.6bdc55f9.js"><link rel="prefetch" href="/assets/js/85.37d730d4.js"><link rel="prefetch" href="/assets/js/86.5434ace2.js"><link rel="prefetch" href="/assets/js/87.49ed623f.js"><link rel="prefetch" href="/assets/js/88.26a51234.js"><link rel="prefetch" href="/assets/js/89.e78b0549.js"><link rel="prefetch" href="/assets/js/9.20f86b01.js"><link rel="prefetch" href="/assets/js/90.b9571163.js"><link rel="prefetch" href="/assets/js/91.75aa3c58.js"><link rel="prefetch" href="/assets/js/92.bc222967.js"><link rel="prefetch" href="/assets/js/93.74ae8dad.js"><link rel="prefetch" href="/assets/js/94.f5b31ddc.js"><link rel="prefetch" href="/assets/js/95.23102f73.js"><link rel="prefetch" href="/assets/js/96.b9e2840b.js"><link rel="prefetch" href="/assets/js/97.c8dbdbf9.js"><link rel="prefetch" href="/assets/js/98.51065426.js"><link rel="prefetch" href="/assets/js/99.172c78d4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f5033492.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container" data-v-8b406220><div data-v-8b406220><div id="loader-wrapper" class="loading-wrapper" data-v-4b73742e data-v-8b406220 data-v-8b406220><div class="loader-main" data-v-4b73742e><div data-v-4b73742e></div><div data-v-4b73742e></div><div data-v-4b73742e></div><div data-v-4b73742e></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-17b1fbca data-v-8b406220 data-v-8b406220><h3 class="title" style="display:none;" data-v-17b1fbca data-v-17b1fbca>桃花圆梦</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-17b1fbca data-v-17b1fbca><input type="password" value="" data-v-17b1fbca> <span data-v-17b1fbca>Konck! Knock!</span> <button data-v-17b1fbca>OK</button></label> <div class="footer" style="display:none;" data-v-17b1fbca data-v-17b1fbca><span data-v-17b1fbca><i class="iconfont reco-theme" data-v-17b1fbca></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-17b1fbca>vuePress-theme-reco</a></span> <span data-v-17b1fbca><i class="iconfont reco-copyright" data-v-17b1fbca></i> <a data-v-17b1fbca><span data-v-17b1fbca>ldy</span>
+            
+          <span data-v-17b1fbca>2018 - </span>
+          2020
+        </a></span></div></div> <div class="hide" data-v-8b406220><header class="navbar" data-v-8b406220><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/blog-logo.jpg" alt="桃花圆梦" class="logo"> <span class="site-name">桃花圆梦</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  时轴
+</a></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/日常学习/" class="nav-link"><i class="iconfont undefined"></i>
+  日常学习
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试资料/" class="nav-link"><i class="iconfont undefined"></i>
+  面试资料
+</a></li></ul></div></div><div class="nav-item"><a href="/zh/interview/" class="nav-link router-link-active"><i class="iconfont reco-suggestion"></i>
+  基础
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-document"></i>
+      文档
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://cn.vuejs.org/v2/api/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Vue
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://vuepress-theme-reco.recoluan.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  vue-theme
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://vuex.vuejs.org/zh/api/#vuex-store" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Vuex
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.kancloud.cn/yunye/axios/234845" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Axios
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jquery123.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  JQuery
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="http://www.runoob.com/bootstrap/bootstrap-tutorial.html" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Bootstrap
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://mp.baomidou.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Mybatis-Plus
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-api"></i>
+      工具
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>本地工具</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tools/clock.html" class="nav-link"><i class="iconfont undefined"></i>
+  CLOCK
+</a></li></ul></li><li class="dropdown-item"><h4>在线便捷</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://smallpdf.com/cn/pdf-to-word" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  PDF编辑器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/jsoneditoronline" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  JSON编辑器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://tableconvert.com/?output=text&amp;data=id%2C%20name%2C%20age%2C%20gender%0A1%2C%20Lawrence%2C%2039%2C%20M%0A2%2C%20Oliver%2C%2025%2C%20M%0A3%2C%20Roberta%2C%2017%2C%20F%0A4%2C%20Bamboo%2C%2070%2C%20F%0A" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  MD表格生成器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://cron.qqe2.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  CRON表达式
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://tool.oschina.net/codeformat/html" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  代码格式化
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://zh.numberempire.com/latexequationeditor.php" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  公式编辑器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://cli.im/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  二维码生成器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://tool.chinaz.com/tools/native_ascii.aspx" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  编码转换器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://www.toyaml.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  配置文件转换器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://jsfiddle.net/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  WEB学习
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  MD编辑器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://tool.lu/markdown/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  HTMLTOMD
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://www.bejson.com/jsontools/json2get/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  JSONTOGET
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><h4>在线服务</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.bootcdn.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  BOOT CDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://cdn.code.baidu.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  百度 CDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://qydev.weixin.qq.com/cdn/cdnjs.html" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  微信 CDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://servers.ustclug.org/2014/06/blog-googlefonts-speedup/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  科大谷歌字体加速
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://tldr.ostera.io/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  tldr命令手册
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><h4>开源镜像</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://opsx.alibaba.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  OPSX
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://mirror.azure.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  AZURE
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://hub.docker.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  DOCKER HUB
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><h4>趋势分析</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://trends.google.com/trends/?geo=US" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  谷歌趋势
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://index.baidu.com/#/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  百度指数
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://tongji.baidu.com/data/browser" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  百度流量研究
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-account"></i>
+      关于
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/features/" class="nav-link"><i class="iconfont undefined"></i>
+  简历
+</a></li><li class="dropdown-item"><!----> <a href="/more/services/" class="nav-link"><i class="iconfont undefined"></i>
+  经历
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/Taomengyuan/Taomengyuan.github.io" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-8b406220></div> <aside class="sidebar" data-v-8b406220><div class="personal-info-wrapper" data-v-40cdcada><img src="/head-logo.gif" alt="author-avatar" class="personal-img" data-v-40cdcada> <h3 class="name" data-v-40cdcada>
+    ldy
+  </h3> <div class="num" data-v-40cdcada><div data-v-40cdcada><h3 data-v-40cdcada>2</h3> <h6 data-v-40cdcada>文章</h6></div> <div data-v-40cdcada><h3 data-v-40cdcada>2</h3> <h6 data-v-40cdcada>标签</h6></div></div> <hr data-v-40cdcada></div> <nav class="nav-links"><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  时轴
+</a></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/日常学习/" class="nav-link"><i class="iconfont undefined"></i>
+  日常学习
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试资料/" class="nav-link"><i class="iconfont undefined"></i>
+  面试资料
+</a></li></ul></div></div><div class="nav-item"><a href="/zh/interview/" class="nav-link router-link-active"><i class="iconfont reco-suggestion"></i>
+  基础
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-document"></i>
+      文档
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://cn.vuejs.org/v2/api/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Vue
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://vuepress-theme-reco.recoluan.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  vue-theme
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://vuex.vuejs.org/zh/api/#vuex-store" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Vuex
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.kancloud.cn/yunye/axios/234845" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Axios
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jquery123.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  JQuery
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="http://www.runoob.com/bootstrap/bootstrap-tutorial.html" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Bootstrap
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://mp.baomidou.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Mybatis-Plus
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-api"></i>
+      工具
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>本地工具</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tools/clock.html" class="nav-link"><i class="iconfont undefined"></i>
+  CLOCK
+</a></li></ul></li><li class="dropdown-item"><h4>在线便捷</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://smallpdf.com/cn/pdf-to-word" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  PDF编辑器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/jsoneditoronline" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  JSON编辑器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://tableconvert.com/?output=text&amp;data=id%2C%20name%2C%20age%2C%20gender%0A1%2C%20Lawrence%2C%2039%2C%20M%0A2%2C%20Oliver%2C%2025%2C%20M%0A3%2C%20Roberta%2C%2017%2C%20F%0A4%2C%20Bamboo%2C%2070%2C%20F%0A" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  MD表格生成器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://cron.qqe2.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  CRON表达式
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://tool.oschina.net/codeformat/html" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  代码格式化
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://zh.numberempire.com/latexequationeditor.php" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  公式编辑器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://cli.im/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  二维码生成器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://tool.chinaz.com/tools/native_ascii.aspx" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  编码转换器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://www.toyaml.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  配置文件转换器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://jsfiddle.net/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  WEB学习
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  MD编辑器
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://tool.lu/markdown/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  HTMLTOMD
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://www.bejson.com/jsontools/json2get/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  JSONTOGET
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><h4>在线服务</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.bootcdn.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  BOOT CDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://cdn.code.baidu.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  百度 CDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://qydev.weixin.qq.com/cdn/cdnjs.html" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  微信 CDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://servers.ustclug.org/2014/06/blog-googlefonts-speedup/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  科大谷歌字体加速
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://tldr.ostera.io/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  tldr命令手册
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><h4>开源镜像</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://opsx.alibaba.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  OPSX
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://mirror.azure.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  AZURE
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://hub.docker.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  DOCKER HUB
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><h4>趋势分析</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://trends.google.com/trends/?geo=US" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  谷歌趋势
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://index.baidu.com/#/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  百度指数
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://tongji.baidu.com/data/browser" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  百度流量研究
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-account"></i>
+      关于
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/features/" class="nav-link"><i class="iconfont undefined"></i>
+  简历
+</a></li><li class="dropdown-item"><!----> <a href="/more/services/" class="nav-link"><i class="iconfont undefined"></i>
+  经历
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/Taomengyuan/Taomengyuan.github.io" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>准备</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>综合题</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Java基础</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Java集合</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Java线程</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/interview/Java-面试宝典-创建线程的方式及实现.html" class="sidebar-link">创建线程的方式及实现</a></li><li><a href="/zh/interview/Java-面试宝典-sleep-、join（）、yield（）有什么区别.html" class="sidebar-link">sleep-、join（）、yield（）有什么区别</a></li><li><a href="/zh/interview/Java-面试宝典-说说-CountDownLatch-原理.html" class="sidebar-link">CountDownLatch原理</a></li><li><a href="/zh/interview/Java-面试宝典-说说-CyclicBarrier-原理.html" class="sidebar-link">CyclicBarrier原理</a></li><li><a href="/zh/interview/Java-面试宝典-说说-Semaphore-原理.html" class="sidebar-link">Semaphore原理</a></li><li><a href="/zh/interview/Java-面试宝典-说说-Exchanger-原理.html" class="sidebar-link">Exchanger原理</a></li><li><a href="/zh/interview/Java-面试宝典-说说-CountDownLatch-与-CyclicBarrier-区别.html" class="sidebar-link">说说CountDownLatch与CyclicBarrier区别</a></li><li><a href="/zh/interview/Java-面试宝典-ThreadLocal-原理分析.html" class="sidebar-link">ThreadLocal原理分析</a></li><li><a href="/zh/interview/Java-面试宝典-线程池的几种方式与使用场景.html" class="sidebar-link">线程池的几种方式与使用场景</a></li><li><a href="/zh/interview/Java-面试宝典-线程的生命周期.html" class="sidebar-link">线程的生命周期</a></li><li><a href="/zh/interview/Java-并发之多线程01.html" class="sidebar-link">java并发程序和共享对象实用策略</a></li><li><a href="/zh/interview/Java-并发之多线程02.html" class="sidebar-link">有助于提高&quot;锁&quot;性能的几点建议</a></li><li><a href="/zh/interview/Java-并发之多线程03.html" class="sidebar-link">在线程池中寻找堆栈</a></li><li><a href="/zh/interview/Java-并发之多线程04.html" class="sidebar-link">挂起(suspend)与线程阻塞工具类LockSupport</a></li><li><a href="/zh/interview/Java-并发之多线程05.html" class="sidebar-link">Java中的线程池</a></li><li><a href="/zh/interview/Java-并发之多线程06.html" class="sidebar-link">Java中的并发工具类</a></li><li><a href="/zh/interview/Java-并发之多线程07.html" class="sidebar-link">Java中的13个原子操作类</a></li><li><a href="/zh/interview/Java-并发之多线程08.html" class="active sidebar-link">Java并发编程基础</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#线程简介" class="sidebar-link">线程简介</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#什么是线程" class="sidebar-link">什么是线程</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#为什么要使用多线程" class="sidebar-link">为什么要使用多线程</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#线程优先级" class="sidebar-link">线程优先级</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#线程的状态" class="sidebar-link">线程的状态</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#daemon线程" class="sidebar-link">Daemon线程</a></li></ul></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#启动和终止线程" class="sidebar-link">启动和终止线程</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#构造线程" class="sidebar-link">构造线程</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#启动线程" class="sidebar-link">启动线程</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#理解中断" class="sidebar-link">理解中断</a></li></ul></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#安全地终止线程" class="sidebar-link">安全地终止线程</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#线程间通信" class="sidebar-link">线程间通信</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#volatile和synchronized关键字" class="sidebar-link">volatile和synchronized关键字</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#等待-通知机制" class="sidebar-link">等待/通知机制</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#等待-通知的经典范式" class="sidebar-link">等待/通知的经典范式</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#管道输入-输出流" class="sidebar-link">管道输入/输出流</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#threadlocal的使用" class="sidebar-link">ThreadLocal的使用</a></li></ul></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#线程应用实例" class="sidebar-link">线程应用实例</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#等待超时模式" class="sidebar-link">等待超时模式</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#一个简单的数据库连接池示例" class="sidebar-link">一个简单的数据库连接池示例</a></li><li class="sidebar-sub-header"><a href="/zh/interview/Java-并发之多线程08.html#线程池技术及其示例" class="sidebar-link">线程池技术及其示例</a></li></ul></li></ul></li><li><a href="/zh/interview/Java-并发之多线程09.html" class="sidebar-link">Java8线程池</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Java锁机制</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Spring</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>分布式</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>微服务</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>数据存储</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>缓存使用</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>消息队列</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Netty</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>安全篇</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>性能篇</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>设计模式</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>需求分析</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>设计能力</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>面试题补充</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-17b1fbca data-v-8b406220><h3 class="title" style="display:none;" data-v-17b1fbca data-v-17b1fbca></h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-17b1fbca data-v-17b1fbca><input type="password" value="" data-v-17b1fbca> <span data-v-17b1fbca>Konck! Knock!</span> <button data-v-17b1fbca>OK</button></label> <div class="footer" style="display:none;" data-v-17b1fbca data-v-17b1fbca><span data-v-17b1fbca><i class="iconfont reco-theme" data-v-17b1fbca></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-17b1fbca>vuePress-theme-reco</a></span> <span data-v-17b1fbca><i class="iconfont reco-copyright" data-v-17b1fbca></i> <a data-v-17b1fbca><span data-v-17b1fbca>ldy</span>
+            
+          <span data-v-17b1fbca>2018 - </span>
+          2020
+        </a></span></div></div> <div data-v-8b406220><main class="page"><!----> <div class="page-title" style="display:none;"><h1>Java并发编程基础</h1> <hr> <div data-v-31a20eae><i class="iconfont reco-account" data-v-31a20eae><span data-v-31a20eae>ldy</span></i> <!----> <i class="iconfont reco-eye" data-v-31a20eae><!----></i> <!----></div></div> <div class="theme-reco-content content__default" style="display:none;"><h1 id="java并发编程基础"><a href="#java并发编程基础" class="header-anchor">#</a> Java并发编程基础</h1> <h2 id="线程简介"><a href="#线程简介" class="header-anchor">#</a> 线程简介</h2> <h3 id="什么是线程"><a href="#什么是线程" class="header-anchor">#</a> 什么是线程</h3> <p>现代操作系统在运行一个程序时，会为其创建一个进程。例如，启动一个Java程序，操作系统就会创建一个Java进程。现代操作系统调度的最小单元是线程，也叫轻量级进程（LightWeight Process），在一个进程里可以创建多个线程，这些线程都拥有各自的计数器、堆栈和局部变量等属性，并且能够访问共享的内存变量。处理器在这些线程上高速切换，让使用者感觉到这些线程在同时执行。</p> <p>一个Java程序从main()方法开始执行，然后按照既定的代码逻辑执行，看似没有其他线程参与，但实际上Java程序天生就是多线程程序，因为执行main()方法的是一个名称为main的线程。下面使用JMX来查看一个普通的Java程序包含哪些线程</p> <div class="language- extra-class"><pre><code>public class MultiThread {
+    
+    public static void main(String[] args) {
+        // 获取Java线程管理MXBean
+        ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+        // 不需要获取同步的monitor和synchronizer信息，仅获取线程和线程堆栈信息
+        ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(false, false);
+        // 遍历线程信息，仅打印线程ID和线程名称信息
+        for (ThreadInfo threadInfo : threadInfos) {
+            System.out.println(&quot;[&quot;+threadInfo.getThreadId()+&quot;] &quot;+threadInfo.getThreadName());
+        }
+    }
+}
+</code></pre></div><p>输出如下所示（输出内容可能不同）。</p> <div class="language- extra-class"><pre><code>[4] Signal Dispatcher　 // 分发处理发送给JVM信号的线程
+[3] Finalizer　　　　 // 调用对象finalize方法的线程
+[2] Reference Handler // 清除Reference的线程
+[1] main　 　　　　 // main线程，用户程序入口
+</code></pre></div><h3 id="为什么要使用多线程"><a href="#为什么要使用多线程" class="header-anchor">#</a> 为什么要使用多线程</h3> <p>（1）更多的处理器核心</p> <p>线程是大多数操作系统调度的基本单元，一个程序作为一个进程来运行，程序运行过程中能够创建多个线程，而一个线程在一个时刻只能运行在一个处理器核心上。试想一下，一个单线程程序在运行时只能使用一个处理器核心，那么再多的处理器核心加入也无法显著提升该程序的执行效率。相反，如果该程序使用多线程技术，将计算逻辑分配到多个处理器核心上，就会显著减少程序的处理时间，并且随着更多处理器核心的加入而变得更有效率。</p> <p>（2）更快的响应时间</p> <p>（3）更好的编程模型</p> <h3 id="线程优先级"><a href="#线程优先级" class="header-anchor">#</a> 线程优先级</h3> <p>在Java线程中，通过一个整型成员变量priority来控制优先级，优先级的范围从1~10，在线程构建的时候可以通过setPriority(int)方法来修改优先级，默认优先级是5，优先级高的线程分配时间片的数量要多于优先级低的线程。设置线程优先级时，针对频繁阻塞（休眠或者I/O操作）的线程需要设置较高优先级，而偏重计算（需要较多CPU时间或者偏运算）的线程则设置较低的优先级，确保处理器不会被独占。在不同的JVM以及操作系统上，线程规划会存在差异，有些操作系统甚至会忽略对线程优先级的设定.</p> <h3 id="线程的状态"><a href="#线程的状态" class="header-anchor">#</a> 线程的状态</h3> <p>Java线程在运行的生命周期中可能处于表4-1所示的6种不同的状态，在给定的一个时刻，线程只能处于其中的一个状态。</p> <p>状态名称</p> <p>说明</p> <p>NEW</p> <p>初始状态,线程被构建,但是还没有被调用start()方法</p> <p>RUNNABLE</p> <p>运行状态,Java线程将操作系统中的就绪和运行两种状态笼统乘坐&quot;运行中&quot;</p> <p>BLOCKED</p> <p>阻塞状态,表示线程阻塞于锁</p> <p>WAITING</p> <p>等待状态,表示线程进入等待状态,进入该状态表示当前线程需要等待其他线程做出一些特定动作(通知或中断)</p> <p>TIME_WAITING</p> <p>超时等待状态,改状态不同于WAITING,它是可以在指定的时间自行返回的</p> <p>TERMINATED</p> <p>终止状态,表示当前线程已经被执行完毕</p> <p>线程创建之后，调用start()方法开始运行。当线程执行wait()方法之后，线程进入等待状态。进入等待状态的线程需要依靠其他线程的通知才能够返回到运行状态，而超时等待状态相当于在等待状态的基础上增加了超时限制，也就是超时时间到达时将会返回到运行状态。当线程调用同步方法时，在没有获取到锁的情况下，线程将会进入到阻塞状态。线程在执行Runnable的run()方法之后将会进入到终止状态。</p> <h3 id="daemon线程"><a href="#daemon线程" class="header-anchor">#</a> Daemon线程</h3> <p>Daemon线程是一种支持型线程，因为它主要被用作程序中后台调度以及支持性工作。这意味着，当一个Java虚拟机中不存在非Daemon线程的时候，Java虚拟机将会退出。可以通过调用Thread.setDaemon(true)将线程设置为Daemon线程。</p> <div class="language- extra-class"><pre><code>public class Daemon {
+    
+    public static void main(String[] args) {
+        Thread thread = new Thread(new DaemonRunner(),&quot;DaemonRunner&quot;);
+        thread.setDaemon(true);
+        thread.start();
+    }
+    
+    static class DaemonRunner implements Runnable{
+        @Override
+        public void run() {
+            try{
+                SleepUtils.second(10);
+            }finally{
+                System.out.println(&quot;DaemonThread finally run.&quot;);
+            }
+        }
+    }
+}   
+</code></pre></div><p>运行Daemon程序，可以看到在终端或者命令提示符上没有任何输出。main线程（非Daemon线程）在启动了线程DaemonRunner之后随着main方法执行完毕而终止，而此时Java虚拟机中已经没有非Daemon线程，虚拟机需要退出。Java虚拟机中的所有Daemon线程都需要立即终止，因此DaemonRunner立即终止，但是DaemonRunner中的finally块并没有执行。</p> <p><strong>注意</strong>　在构建Daemon线程时，不能依靠finally块中的内容来确保执行关闭或清理资源的逻辑。</p> <h2 id="启动和终止线程"><a href="#启动和终止线程" class="header-anchor">#</a> 启动和终止线程</h2> <h3 id="构造线程"><a href="#构造线程" class="header-anchor">#</a> 构造线程</h3> <h3 id="启动线程"><a href="#启动线程" class="header-anchor">#</a> 启动线程</h3> <p>线程对象在初始化完成之后，调用start()方法就可以启动这个线程。线程start()方法的含义是：当前线程（即parent线程）同步告知Java虚拟机，只要线程规划器空闲，应立即启动调用start()方法的线程。</p> <h3 id="理解中断"><a href="#理解中断" class="header-anchor">#</a> 理解中断</h3> <p>中断可以理解为线程的一个标识位属性，它表示一个运行中的线程是否被其他线程进行了中断操作。中断好比其他线程对该线程打了个招呼，其他线程通过调用该线程的interrupt()方法对其进行中断操作。</p> <p>线程通过检查自身是否被中断来进行响应，线程通过方法isInterrupted()来进行判断是否被中断，也可以调用静态方法Thread.interrupted()对当前线程的中断标识位进行复位。如果该线程已经处于终结状态，即使该线程被中断过，在调用该线程对象的isInterrupted()时依旧会返回false。</p> <div class="language- extra-class"><pre><code>public class Interrupted {
+    
+    public static void main(String[] args) throws InterruptedException {
+        //sleepThread不停的尝试睡眠
+        Thread sleepThread= new Thread(new SleepRunner(),&quot;SleepRunner&quot;);
+        sleepThread.setDaemon(true);
+         // busyThread不停的运行
+        Thread busyThread = new Thread(new BusyRunner(),&quot;BusyRunner&quot;);
+        busyThread.setDaemon(true);
+        sleepThread.start();
+        busyThread.start();
+      // 休眠5秒，让sleepThread和busyThread充分运行
+        TimeUnit.SECONDS.sleep(5);
+        sleepThread.interrupt();
+        busyThread.interrupt();
+        System.out.println(&quot;SleepThread interrupted is &quot;+sleepThread.isInterrupted());
+        System.out.println(&quot;BusyThread interrupted is &quot;+busyThread.isInterrupted());
+      // 防止sleepThread和busyThread立刻退出
+        TimeUnit.SECONDS.sleep(2);
+    }
+    
+    static class SleepRunner implements Runnable{
+        @Override
+        public void run() {
+            while(true){
+                SleepUtils.second(10);
+            }
+        }
+    }
+    
+    static class BusyRunner implements Runnable{
+
+        @Override
+        public void run() {
+            while(true){}
+        }
+    }
+}
+</code></pre></div><h2 id="安全地终止线程"><a href="#安全地终止线程" class="header-anchor">#</a> 安全地终止线程</h2> <p>创建了一个线程CountThread，它不断地进行变量累加，而主线程尝试对其进行中断操作和停止操作。</p> <div class="language- extra-class"><pre><code>public class Shutdown {
+    
+    public static void main(String[] args) throws InterruptedException {
+        Runner one = new Runner();
+        Thread countThread = new Thread(one,&quot;CountThread&quot;);
+        countThread.start();
+        TimeUnit.SECONDS.sleep(1);
+        countThread.interrupt();
+        Runner two = new Runner();
+        countThread = new Thread(two,&quot;CountThread&quot;);
+        countThread.start();
+        TimeUnit.SECONDS.sleep(1);
+        two.cancel();
+    }
+    
+    private static class Runner implements Runnable{
+        private long i;
+        private volatile boolean on = true;
+        @Override
+        public void run() {
+            while(on &amp;&amp; !Thread.currentThread().isInterrupted()){
+                i++;
+            }
+            System.out.println(&quot;Count i = &quot;+i);
+        }
+        public void cancel(){
+            on = false;
+        }
+    }
+}
+</code></pre></div><h2 id="线程间通信"><a href="#线程间通信" class="header-anchor">#</a> 线程间通信</h2> <h3 id="volatile和synchronized关键字"><a href="#volatile和synchronized关键字" class="header-anchor">#</a> volatile和synchronized关键字</h3> <p>Java支持多个线程同时访问一个对象或者对象的成员变量，由于每个线程可以拥有这个变量的拷贝（虽然对象以及成员变量分配的内存是在共享内存中的，但是每个执行的线程还是可以拥有一份拷贝，这样做的目的是加速程序的执行，这是现代多核处理器的一个显著特性），所以程序在执行过程中，一个线程看到的变量并不一定是最新的。</p> <p>关键字volatile可以用来修饰字段（成员变量），就是告知程序任何对该变量的访问均需要从共享内存中获取，而对它的改变必须同步刷新回共享内存，它能保证所有线程对变量访问的可见性。</p> <p>举个例子，定义一个表示程序是否运行的成员变量boolean on=true，那么另一个线程可能对它执行关闭动作（on=false），这里涉及多个线程对变量的访问，因此需要将其定义成为volatile boolean on＝true，这样其他线程对它进行改变时，可以让所有线程感知到变化，因为所有对on变量的访问和修改都需要以共享内存为准。但是，过多地使用volatile是不必要的，因为它会降低程序执行的效率。</p> <p>关键字synchronized可以修饰方法或者以同步块的形式来进行使用，它主要确保多个线程在同一个时刻，只能有一个线程处于方法或者同步块中，它保证了线程对变量访问的可见性和排他性。</p> <div class="language- extra-class"><pre><code>public class Synchronized {
+    
+    public static void main(String[] args) {
+        //对synchronized Class对象进行加锁
+        synchronized (Synchronized.class) {
+        }
+        //静态同步方法,对synchronized Class对象进行加锁
+        m();
+    }
+    
+    public static synchronized void m(){
+        
+    }
+}   
+</code></pre></div><h3 id="等待-通知机制"><a href="#等待-通知机制" class="header-anchor">#</a> 等待/通知机制</h3> <p>一个线程修改了一个对象的值，而另一个线程感知到了变化，然后进行相应的操作，整个过程开始于一个线程，而最终执行又是另一个线程。前者是生产者，后者就是消费者，这种模式隔离了“做什么”（what）和“怎么做”（How），在功能层面上实现了解耦，体系结构上具备了良好的伸缩性，但是在Java语言中如何实现类似的功能呢？</p> <p>简单的办法是让消费者线程不断地循环检查变量是否符合预期，如下面代码所示，在while循环中设置不满足的条件，如果条件满足则退出while循环，从而完成消费者的工作。</p> <div class="language- extra-class"><pre><code>while(value != desire){
+    Thread.sleep(10000);
+}
+doSomething();
+</code></pre></div><p>上面这段伪代码在条件不满足时就睡眠一段时间，这样做的目的是防止过快的“无效”尝试，这种方式看似能够解实现所需的功能，但是却存在如下问题。</p> <p>1）难以确保及时性。在睡眠时，基本不消耗处理器资源，但是如果睡得过久，就不能及时发现条件已经变化，也就是及时性难以保证。<br>
+2）难以降低开销。如果降低睡眠的时间，比如休眠1毫秒，这样消费者能更加迅速地发现条件变化，但是却可能消耗更多的处理器资源，造成了无端的浪费。</p> <p>等待/通知机制，是指一个线程A调用了对象O的wait()方法进入等待状态，而另一个线程B调用了对象O的notify()或者notifyAll()方法，线程A收到通知后从对象O的wait()方法返回，进而执行后续操作。上述两个线程通过对象O来完成交互，而对象上的wait()和notify/notifyAll()的关系就如同开关信号一样，用来完成等待方和通知方之间的交互工作。</p> <p>在代码清单4-11所示的例子中，创建了两个线程——WaitThread和NotifyThread，前者检查flag值是否为false，如果符合要求，进行后续操作，否则在lock上等待，后者在睡眠了一段时间后对lock进行通知，示例如下所示。</p> <div class="language- extra-class"><pre><code>public class WaitNotify {
+    static boolean flag = true;
+    static Object lock = new Object();
+    
+    public static void main(String[] args) throws InterruptedException {
+        Thread waitThread = new Thread(new Wait(),&quot;WaitThread&quot;);
+        waitThread.start();
+        TimeUnit.SECONDS.sleep(1);
+        Thread notifyThread = new Thread(new Notify(),&quot;NotifyThread&quot;);
+        notifyThread.start();
+    }
+    
+    static class Wait implements Runnable{
+        @Override
+        public void run() {
+            synchronized (lock) {
+                //当条件不满足时,继续wait,同时释放了lock的锁
+                while(flag){
+                    try {
+                        System.out.println(Thread.currentThread()+&quot; flag is true. wa@ &quot;+new SimpleDateFormat(&quot;HH:mm:ss&quot;).format(new Date()));
+                        lock.wait();
+                    } catch (Exception e) {
+                    }
+                }
+                //条件满足时,完成工作
+                System.out.println(Thread.currentThread()+&quot; flag is false . running @ &quot;+new SimpleDateFormat(&quot;HH:mm:ss&quot;).format(new Date()));
+            }
+        }
+    }
+    static class Notify implements Runnable{
+        @Override
+        public void run() {
+            synchronized (lock) {
+                //获取Lock锁,然后进行通知,通知时不会释放lock的锁
+                //直到当前线程释放了lock后,waitThread才能从wait方法中返回
+                System.out.println(Thread.currentThread()+&quot; hold lock.notify @ &quot;+new SimpleDateFormat(&quot;HH:mm:ss&quot;).format(new Date()));
+                lock.notifyAll();
+                flag = false;
+                SleepUtils.second(5);
+            }
+            
+            synchronized (lock) {
+                System.out.println(Thread.currentThread()+&quot; hold lock again. sleep @ &quot;+new SimpleDateFormat(&quot;HH:mm:ss&quot;).format(new Date()));
+                SleepUtils.second(5);
+            }
+        }
+        
+    }
+}
+
+Thread[WaitThread,5,main] flag is true. wa@ 10:04:53
+Thread[NotifyThread,5,main] hold lock.notify @ 10:04:54
+Thread[NotifyThread,5,main] hold lock again. sleep @ 10:04:59
+Thread[WaitThread,5,main] flag is false . running @ 10:05:04
+</code></pre></div><p>上述第3行和第4行输出的顺序可能会互换，而上述例子主要说明了调用wait()、notify()以及notifyAll()时需要注意的细节，如下。<br>
+1）使用wait()、notify()和notifyAll()时需要先对调用对象加锁。<br>
+2）调用wait()方法后，线程状态由RUNNING变为WAITING，并将当前线程放置到对象的等待队列。<br>
+3）notify()或notifyAll()方法调用后，等待线程依旧不会从wait()返回，需要调用notify()或notifAll()的线程释放锁之后，等待线程才有机会从wait()返回。<br>
+4）notify()方法将等待队列中的一个等待线程从等待队列中移到同步队列中，而notifyAll()方法则是将等待队列中所有的线程全部移到同步队列，被移动的线程状态由WAITING变为BLOCKED。<br>
+5）从wait()方法返回的前提是获得了调用对象的锁。</p> <p>WaitThread首先获取了对象的锁，然后调用对象的wait()方法，从而放弃了锁并进入了对象的等待队WaitQueue中，进入等待状态。由于WaitThread释放了对象的锁，NotifyThread随后获取了对象的锁，并调用对象的notify()方法，将WaitThread从WaitQueue移到SynchronizedQueue中，此时WaitThread的状态变为阻塞状态。NotifyThread释放了锁之后，WaitThread再次获取到锁并从wait()方法返回继续执行。</p> <h3 id="等待-通知的经典范式"><a href="#等待-通知的经典范式" class="header-anchor">#</a> 等待/通知的经典范式</h3> <p>从4.3.2节中的WaitNotify示例中可以提炼出等待/通知的经典范式，该范式分为两部分，分别针对等待方（消费者）和通知方（生产者）。<br>
+等待方遵循如下原则。<br>
+1）获取对象的锁。<br>
+2）如果条件不满足，那么调用对象的wait()方法，被通知后仍要检查条件。<br>
+3）条件满足则执行对应的逻辑。<br>
+对应的伪代码如下。</p> <div class="language- extra-class"><pre><code>synchronized(对象) {
+    while(条件不满足) {
+        对象.wait();  
+    }
+    对应的处理逻辑
+}
+</code></pre></div><p>通知方遵循如下原则。<br>
+1）获得对象的锁。<br>
+2）改变条件。<br>
+3）通知所有等待在对象上的线程。<br>
+对应的伪代码如下。</p> <div class="language- extra-class"><pre><code>synchronized(对象) {
+    改变条件
+    对象.notifyAll();
+}
+</code></pre></div><h3 id="管道输入-输出流"><a href="#管道输入-输出流" class="header-anchor">#</a> 管道输入/输出流</h3> <p>管道输入/输出流和普通的文件输入/输出流或者网络输入/输出流不同之处在于，它主要用于线程之间的数据传输，而传输的媒介为内存。<br>
+管道输入/输出流主要包括了如下4种具体实现：PipedOutputStream、PipedInputStream、PipedReader和PipedWriter，前两种面向字节，而后两种面向字符。</p> <p>在代码清单4-12所示的例子中，创建了printThread，它用来接受main线程的输入，任何main线程的输入均通过PipedWriter写入，而printThread在另一端通过PipedReader将内容读出并打印。</p> <div class="language- extra-class"><pre><code>public class Piped {
+    public static void main(String[] args) throws Exception {
+        PipedWriter out = new PipedWriter();
+        PipedReader in = new PipedReader();
+        // 将输出流和输入流进行连接，否则在使用时会抛出IOException
+        out.connect(in);
+        Thread printThread = new Thread(new Print(in), &quot;PrintThread&quot;);
+        printThread.start();
+        int receive = 0;
+        try {
+            while((receive = System.in.read()) != -1){
+                out.write(receive);
+            }
+        } finally {
+            out.close();
+        }
+    }
+    
+    static class Print implements Runnable{
+        private PipedReader in;
+        public Print(PipedReader in) {
+            this.in = in;
+        }
+        @Override
+        public void run() {
+            int receive =0;
+            try{
+                while((receive = in.read()) != -1){
+                    System.out.print((char)receive);
+                }
+            }catch(Exception e){
+                
+            }
+        }
+        
+    }
+}
+</code></pre></div><p>对于Piped类型的流，必须先要进行绑定，也就是调用connect()方法，如果没有将输入/输出流绑定起来，对于该流的访问将会抛出异常。</p> <h3 id="threadlocal的使用"><a href="#threadlocal的使用" class="header-anchor">#</a> ThreadLocal的使用</h3> <p>ThreadLocal，即线程变量，是一个以ThreadLocal对象为键、任意对象为值的存储结构。这个结构被附带在线程上，也就是说一个线程可以根据一个ThreadLocal对象查询到绑定在这个线程上的一个值。</p> <p>可以通过set(T)方法来设置一个值，在当前线程下再通过get()方法获取到原先设置的值。<br>
+在代码清单4-15所示的例子中，构建了一个常用的Profiler类，它具有begin()和end()两个方法，而end()方法返回从begin()方法调用开始到end()方法被调用时的时间差，单位是毫秒。</p> <div class="language- extra-class"><pre><code>public class Profiler {
+    private static final ThreadLocal&lt;Long&gt; TIME_THREADLOCAL =new ThreadLocal&lt;&gt;();
+    protected Long initialValue(){
+        return System.currentTimeMillis();
+    }
+    
+    public static final void begin(){
+        TIME_THREADLOCAL.set(System.currentTimeMillis());
+    }
+    public static final long end(){
+        return System.currentTimeMillis() - TIME_THREADLOCAL.get();
+    }
+    public static void main(String[] args) throws InterruptedException {
+        Profiler.begin();
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println(&quot;Cost: &quot;+Profiler.end()+&quot; mills&quot;);
+    }
+}
+</code></pre></div><p>Profiler可以被复用在方法调用耗时统计的功能上，在方法的入口前执行begin()方法，在方法调用后执行end()方法，好处是两个方法的调用不用在一个方法或者类中，比如在AOP（面向方面编程）中，可以在方法调用前的切入点执行begin()方法，而在方法调用后的切入点执行end()方法，这样依旧可以获得方法的执行耗时。</p> <h2 id="线程应用实例"><a href="#线程应用实例" class="header-anchor">#</a> 线程应用实例</h2> <h3 id="等待超时模式"><a href="#等待超时模式" class="header-anchor">#</a> 等待超时模式</h3> <p>开发人员经常会遇到这样的方法调用场景：调用一个方法时等待一段时间（一般来说是给定一个时间段），如果该方法能够在给定的时间段之内得到结果，那么将结果立刻返回，反之，超时返回默认结果。</p> <p>前面的章节介绍了等待/通知的经典范式，即加锁、条件循环和处理逻辑3个步骤，而这种范式无法做到超时等待。而超时等待的加入，只需要对经典范式做出非常小的改动，改动内容如下所示。<br>
+假设超时时间段是T，那么可以推断出在当前时间now+T之后就会超时。</p> <p>定义如下变量。<br>
+·等待持续时间：REMAINING=T。<br>
+·超时时间：FUTURE=now+T。<br>
+这时仅需要wait(REMAINING)即可，在wait(REMAINING)返回之后会将执行：<br>
+REMAINING=FUTURE–now。如果REMAINING小于等于0，表示已经超时，直接退出，否则将继续执行wait(REMAINING)。</p> <div class="language- extra-class"><pre><code>public synchronized Object get(long mills)throws InterruptedException{
+    long future = System.currentTimeMillis()+mills;
+    long remaining = mills;
+    //当超时大于0并且result返回值不满足要求
+    while((result == null) &amp;&amp; remaining &gt;0){
+        wait(remaining);
+        remaining = future - System.currentTimeMills();
+    }
+    return result;
+}
+</code></pre></div><p>可以看出，等待超时模式就是在等待/通知范式基础上增加了超时控制，这使得该模式相比原有范式更具有灵活性，因为即使方法执行时间过长，也不会“永久”阻塞调用者，而是会按照调用者的要求“按时”返回。</p> <h3 id="一个简单的数据库连接池示例"><a href="#一个简单的数据库连接池示例" class="header-anchor">#</a> 一个简单的数据库连接池示例</h3> <p>我们使用等待超时模式来构造一个简单的数据库连接池，在示例中模拟从连接池中获取、使用和释放连接的过程，而客户端获取连接的过程被设定为等待超时的模式，也就是在1000毫秒内如果无法获取到可用连接，将会返回给客户端一个null。设定连接池的大小为10个，然后通过调节客户端的线程数来模拟无法获取连接的场景。</p> <p>首先看一下连接池的定义。它通过构造函数初始化连接的最大上限，通过一个双向队列来维护连接，调用方需要先调用fetchConnection(long)方法来指定在多少毫秒内超时获取连接，当连接使用完成后，需要调用releaseConnection(Connection)方法将连接放回线程池，示例如代码清单4-16所示。</p> <div class="language- extra-class"><pre><code>public class ConnectionPool {
+    private LinkedList&lt;Connection&gt; pool = new LinkedList&lt;&gt;();
+    public ConnectionPool(int initialSize){
+        if(initialSize&gt;0){
+            for(int i =0;i&lt;initialSize;i++){
+                pool.addLast(ConnectionDriver.createConnection());
+            }
+        }
+    }
+    public void releaseConnection(Connection connection){
+        if(connection !=null){
+            synchronized (pool) {
+                // 连接释放后需要进行通知，这样其他消费者能够感知到连接池中已经归还了一个连接
+                pool.addLast(connection);
+                pool.notifyAll();
+            }
+        }
+    }
+    // 在mills内无法获取到连接，将会返回null
+    public Connection fetchConnection(long mills) throws Exception{
+        synchronized (pool) {
+            // 完全超时
+            if(mills &lt;=0){
+                while(pool.isEmpty()){
+                    pool.wait();
+                }
+                return pool.removeFirst();
+            }else{
+                long future = System.currentTimeMillis()+mills;
+                long remaining = mills;
+                while(pool.isEmpty() &amp;&amp; remaining&gt;0){
+                    pool.wait(remaining);
+                    remaining = future - System.currentTimeMillis();
+                }
+                Connection result = null;
+                if(!pool.isEmpty()){
+                    result = pool.removeFirst();
+                }
+                return result;
+            }
+        }
+    }
+}
+</code></pre></div><p>由于java.sql.Connection是一个接口，最终的实现是由数据库驱动提供方来实现的，考虑到只是个示例，我们通过动态代理构造了一个Connection，该Connection的代理实现仅仅是在commit()方法调用时休眠100毫秒，示例如代码清单4-17所示。</p> <div class="language- extra-class"><pre><code>public class ConnectionDriver {
+    static class ConnectionHandler implements InvocationHandler{
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            if(method.getName().equals(&quot;commit&quot;)){
+                TimeUnit.MICROSECONDS.sleep(100);
+            }
+            return null;
+        }
+    }
+    // 创建一个Connection的代理，在commit时休眠100毫秒
+    public static final Connection createConnection(){
+        return (Connection)Proxy.newProxyInstance(ConnectionDriver.class.getClassLoader(), 
+                new Class[]{Connection.class}, new ConnectionHandler());
+    }
+}
+</code></pre></div><p>下面通过一个示例来测试简易数据库连接池的工作情况，模拟客户端ConnectionRunner获取、使用、最后释放连接的过程，当它使用时连接将会增加获取到连接的数量，反之，将会增加未获取到连接的数量，示例如代码清单4-18所示。</p> <div class="language- extra-class"><pre><code>public class ConnectionPoolTest {
+    static ConnectionPool pool = new ConnectionPool(10);
+    // 保证所有ConnectionRunner能够同时开始
+    static CountDownLatch start = new CountDownLatch(1);
+    // main线程将会等待所有ConnectionRunner结束后才能继续执行
+    static CountDownLatch end;
+    public static void main(String[] args) throws InterruptedException {
+        // 线程数量，可以修改线程数量进行观察
+        int threadCount =10;
+        end = new CountDownLatch(threadCount);
+        int count = 20;
+        AtomicInteger got = new AtomicInteger();
+        AtomicInteger notGot = new AtomicInteger();
+        for (int i = 0; i &lt; threadCount; i++) {
+            Thread thread = new Thread(new ConnetionRunner(count, got, notGot),&quot;ConnectionRunnerThread&quot;);
+            thread.start();
+        }
+        start.countDown();
+        end.await();
+        System.out.println(&quot;total invoke: &quot;+(threadCount * count));
+        System.out.println(&quot;got connection: &quot;+got);
+        System.out.println(&quot;not got connection &quot;+notGot);
+    }
+    
+    static class ConnetionRunner implements Runnable{
+        int count;
+        AtomicInteger got;
+        AtomicInteger notGot;
+        public ConnetionRunner(int count,AtomicInteger got,AtomicInteger notGot) {
+            this.count = count;
+            this.got = got;
+            this.notGot = notGot;
+        }
+        
+        @Override
+        public void run() {
+            try {
+                start.await();
+            } catch (Exception e) {
+            }
+            while(count&gt;0){
+                try {
+                    // 从线程池中获取连接，如果1000ms内无法获取到，将会返回null
+                    // 分别统计连接获取的数量got和未获取到的数量notGot
+                    Connection connection = pool.fetchConnection(1000);
+                    if(connection !=null){
+                        try {
+                            connection.createStatement();
+                            connection.commit();
+                        } finally {
+                            pool.releaseConnection(connection);
+                            got.incrementAndGet();
+                        }
+                    }else{
+                        notGot.incrementAndGet();
+                    }
+                } catch(Exception e) {
+                }finally {
+                    count--;
+                }
+            }
+            end.countDown();
+        }
+    }
+}
+</code></pre></div><h3 id="线程池技术及其示例"><a href="#线程池技术及其示例" class="header-anchor">#</a> 线程池技术及其示例</h3> <p>对于服务端的程序，经常面对的是客户端传入的短小（执行时间短、工作内容较为单一）任务，需要服务端快速处理并返回结果。如果服务端每次接受到一个任务，创建一个线程，然后进行执行，这在原型阶段是个不错的选择，但是面对成千上万的任务递交进服务器时，如果还是采用一个任务一个线程的方式，那么将会创建数以万记的线程，这不是一个好的选择。因为这会使操作系统频繁的进行线程上下文切换，无故增加系统的负载，而线程的创建和消亡都是需要耗费系统资源的，也无疑浪费了系统资源。</p> <p>线程池技术能够很好地解决这个问题，它预先创建了若干数量的线程，并且不能由用户直接对线程的创建进行控制，在这个前提下重复使用固定或较为固定数目的线程来完成任务的执行。这样做的好处是，一方面，消除了频繁创建和消亡线程的系统资源开销，另一方面，面对过量任务的提交能够平缓的劣化。</p> <div class="language- extra-class"><pre><code>public interface ThreadPool&lt;Job extends Runnable&gt; {
+    // 执行一个Job，这个Job需要实现Runnable
+    void execute(Job job);
+    // 关闭线程池
+    void shutdown();
+    // 增加工作者线程
+    void addWorkers(int num);
+    // 减少工作者线程
+    void removeWorker(int num);
+    // 得到正在等待执行的任务数量
+    int getJobSize();
+}
+</code></pre></div><p>客户端可以通过execute(Job)方法将Job提交入线程池执行，而客户端自身不用等待Job的执行完成。除了execute(Job)方法以外，线程池接口提供了增大/减少工作者线程以及关闭线程池的方法。这里工作者线程代表着一个重复执行Job的线程，而每个由客户端提交的Job都将进入到一个工作队列中等待工作者线程的处理。</p></div> <footer class="page-edit" style="display:none;"><div class="edit-link"><a href="https://github.com/Taomengyuan/vueblog/edit/master/docs/zh/interview/Java-并发之多线程08.md" target="_blank" rel="noopener noreferrer">编辑</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">更新: </span> <span class="time">4/23/2020, 12:20:17 PM</span></div></footer> <!----> <!----></main> <!----> <div class="comments-wrapper" data-v-8b406220><!----></div></div></div></div></div></div><div class="global-ui"><!----><canvas id="vuepress-canvas-ribbon"></canvas><canvas id="vuepress-canvas-cursor"></canvas><div id="goTop" class="hide-cat" data-v-6454e75c></div><div></div><div class="reco-bgm-panel" data-v-d24f48b8><audio id="bgm" src="http://fdfs.xmcdn.com/group68/M00/3B/F3/wKgMbl262zmz3gcXABdw_Y4HQ8Y789.mp3" data-v-d24f48b8></audio> <div class="reco-float-box" style="bottom:100px;z-index:999999;display:none;" data-v-d24f48b8 data-v-d24f48b8><img src="http://p2.music.126.net/DK1_4sP_339o5rowMdPXdw==/109951164071024476.jpg" data-v-d24f48b8></div> <div class="reco-bgm-box" style="left:10px;bottom:10px;z-index:999999;" data-v-d24f48b8 data-v-d24f48b8><div class="reco-bgm-cover" style="background-image:url(http://p2.music.126.net/DK1_4sP_339o5rowMdPXdw==/109951164071024476.jpg);" data-v-d24f48b8><div class="mini-operation" style="display:none;" data-v-d24f48b8><i class="reco-bgm reco-bgm-pause" style="display:none;" data-v-d24f48b8></i> <i class="reco-bgm reco-bgm-play" style="display:none;" data-v-d24f48b8></i></div> <div class="falut-message" style="display:none;" data-v-d24f48b8>
+          播放失败
+        </div></div> <div class="reco-bgm-info" data-v-d24f48b8 data-v-d24f48b8><div class="info-box" data-v-d24f48b8><i class="reco-bgm reco-bgm-music music" data-v-d24f48b8></i>世间美好与你环环相扣</div> <div class="info-box" data-v-d24f48b8><i class="reco-bgm reco-bgm-artist" data-v-d24f48b8></i>薛之谦</div> <div class="reco-bgm-progress" data-v-d24f48b8><div class="progress-bar" data-v-d24f48b8><div class="bar" data-v-d24f48b8></div></div></div> <div class="reco-bgm-operation" data-v-d24f48b8><i class="reco-bgm reco-bgm-last last" data-v-d24f48b8></i> <i class="reco-bgm reco-bgm-pause pause" style="display:none;" data-v-d24f48b8></i> <i class="reco-bgm reco-bgm-play play" data-v-d24f48b8></i> <i class="reco-bgm reco-bgm-next next" data-v-d24f48b8></i> <i class="reco-bgm reco-bgm-volume1 volume" data-v-d24f48b8></i> <i class="reco-bgm reco-bgm-mute mute" style="display:none;" data-v-d24f48b8></i> <div class="volume-bar" data-v-d24f48b8><div class="bar" data-v-d24f48b8></div></div></div></div> <div class="reco-bgm-left-box" data-v-d24f48b8 data-v-d24f48b8><i class="reco-bgm reco-bgm-left" data-v-d24f48b8></i></div></div></div><div id="jsi-flying-fish-container" class="container fish-footer"></div></div></div>
+    <script src="/assets/js/app.1db75ca0.js" defer></script><script src="/assets/js/3.6c104418.js" defer></script><script src="/assets/js/1.dc7420e8.js" defer></script><script src="/assets/js/49.c3499600.js" defer></script><script src="/assets/js/10.0927cd0d.js" defer></script>
+  </body>
+</html>
